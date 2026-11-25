@@ -47,6 +47,23 @@ function App() {
   const changeQty = (id, amount) => setCart(current => current.map(item => item.id === id ? { ...item, qty: item.qty + amount } : item).filter(item => item.qty > 0));
   const removeItem = id => setCart(current => current.filter(item => item.id !== id));
 
+  const checkoutViaWhatsApp = () => {
+    const orderLines = cart.map(item =>
+      `• ${item.name} × ${item.qty} — ${(item.price * item.qty).toFixed(2)}`
+    ).join("\\n");
+    const message = [
+      "Hello AURÈLE! I'd like to place an order:",
+      "",
+      orderLines,
+      "",
+      `Total: ${total.toFixed(2)}`,
+      "",
+      "Please confirm my order. Thank you!"
+    ].join("\\n");
+    const whatsappUrl = `https://wa.me/212617543162?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+  };
+
   return (
     <div className="site-shell">
       <div className="announcement">A NEW STANDARD IN HAIRCARE <span>✦</span> DISCOVER THE AURÈLE RITUAL</div>
@@ -131,7 +148,7 @@ function App() {
           <div className="drawer-header"><div><p className="eyebrow">YOUR SELECTION</p><h2>Your bag <span>({count})</span></h2></div><button className="icon-button" onClick={() => setCartOpen(false)} aria-label="Close cart"><X /></button></div>
           {cart.length === 0 ? <div className="empty-cart"><ShoppingBag size={30} /><h3>Your bag is waiting.</h3><p>Discover the AURÈLE essentials and find your ritual.</p><button className="button button-gold" onClick={() => { setCartOpen(false); document.getElementById("collection").scrollIntoView({ behavior: "smooth" }); }}>EXPLORE COLLECTION <ArrowRight size={14} /></button></div> :
             <><div className="cart-items">{cart.map(item => <div className="cart-item" key={item.id}><img src={item.image} alt="" /><div className="cart-item-info"><h3>{item.name}</h3><span>{item.size} · ${item.price}</span><div className="qty-control"><button onClick={() => changeQty(item.id, -1)} aria-label="Decrease quantity"><Minus size={13} /></button><span>{item.qty}</span><button onClick={() => changeQty(item.id, 1)} aria-label="Increase quantity"><Plus size={13} /></button></div></div><div className="cart-item-end"><b>${item.price * item.qty}</b><button onClick={() => removeItem(item.id)} className="remove-link">REMOVE</button></div></div>)}</div>
-              <div className="cart-summary"><div><span>Subtotal</span><strong>${total.toFixed(2)}</strong></div><p>Shipping and taxes calculated at checkout.</p><button className="button button-gold checkout" onClick={() => alert("Thank you for discovering AURÈLE. Checkout integration can be connected when your store is ready.")}>CONTINUE TO CHECKOUT <ArrowRight size={15} /></button><button className="continue-shopping" onClick={() => setCartOpen(false)}>CONTINUE SHOPPING</button></div></>}
+              <div className="cart-summary"><div><span>Subtotal</span><strong>${total.toFixed(2)}</strong></div><p>Shipping and taxes calculated at checkout.</p><button className="button button-gold checkout" onClick={checkoutViaWhatsApp}>ORDER VIA WHATSAPP <ArrowRight size={15} /></button><button className="continue-shopping" onClick={() => setCartOpen(false)}>CONTINUE SHOPPING</button></div></>}
         </aside>
       </div>}
     </div>
