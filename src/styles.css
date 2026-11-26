@@ -1255,3 +1255,106 @@ blockquote em {
     .nature-item:nth-child(3), .nature-item:nth-child(4) { border-top: 1px solid var(--line) }
     .nature-item p { min-height: 0; margin-bottom: 10px }
 }
+
+
+/* Header About fade-in editorial popup */
+.about-trigger {
+    border: 0;
+    padding: 0;
+    background: none;
+    color: #d1ccc2;
+    font-size: 9px;
+    letter-spacing: 1.7px;
+    transition: color .2s
+}
+.about-trigger:hover { color: var(--gold) }
+.about-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(0, 0, 0, .78);
+    backdrop-filter: blur(8px);
+    animation: aboutFadeIn .35s ease both;
+    overflow-y: auto
+}
+.about-modal {
+    position: relative;
+    width: min(760px, 100%);
+    max-height: calc(100vh - 48px);
+    overflow-y: auto;
+    padding: 58px 64px 48px;
+    background: radial-gradient(ellipse at 100% 0%, rgba(197,164,109,.11), transparent 43%), #141411;
+    border: 1px solid var(--line);
+    box-shadow: 0 28px 100px #000b;
+    animation: aboutRiseIn .45s cubic-bezier(.2,.75,.25,1) both
+}
+.about-modal-close {
+    position: absolute;
+    top: 17px;
+    right: 17px;
+    width: 40px;
+    height: 40px;
+    justify-content: center;
+    border: 1px solid var(--line);
+    background: rgba(10,10,9,.6)
+}
+.about-modal>.eyebrow { margin: 0 0 20px }
+.about-modal h2 {
+    margin: 0;
+    font: 400 clamp(38px, 5vw, 55px)/1.12 "Playfair Display", serif;
+    letter-spacing: -1px
+}
+.about-modal h2 em { color: var(--gold); font-weight: 400 }
+.about-modal-lead {
+    max-width: 590px;
+    margin: 20px 0 30px;
+    color: #b5afa4;
+    font-size: 12px;
+    line-height: 2
+}
+.about-modal-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-top: 1px solid var(--line);
+    border-left: 1px solid var(--line)
+}
+.about-modal-grid article {
+    padding: 20px 22px;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line)
+}
+.about-modal-grid article>span,
+.about-modal-origin h3 {
+    color: var(--gold);
+    font-size: 8px;
+    letter-spacing: 1.7px
+}
+.about-modal-grid h3 {
+    margin: 10px 0 7px;
+    font: 400 20px "Playfair Display", serif
+}
+.about-modal-grid p,
+.about-modal-origin p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.8
+}
+.about-modal-origin { padding: 22px 0 0 }
+.about-modal-origin h3 { margin: 0 0 9px }
+.about-modal-cta { margin-top: 25px }
+@keyframes aboutFadeIn { from { opacity: 0 } to { opacity: 1 } }
+@keyframes aboutRiseIn { from { opacity: 0; transform: translateY(16px) scale(.985) } to { opacity: 1; transform: translateY(0) scale(1) } }
+@media(max-width:650px) {
+    .about-modal-backdrop { padding: 12px; align-items: flex-start }
+    .about-modal { max-height: calc(100vh - 24px); padding: 52px 23px 30px; margin: auto 0 }
+    .about-modal-grid { grid-template-columns: 1fr }
+    .about-modal-grid article { padding: 17px 15px }
+}
+@media(prefers-reduced-motion:reduce) {
+    .about-modal-backdrop, .about-modal { animation: none }
+}
