@@ -110,21 +110,6 @@ function App() {
           <div className="hero-bottom"><span>01 / 04</span><span>FORMULATED FOR YOUR RITUAL</span><a href="#collection">SCROLL TO DISCOVER <ArrowDown size={13} /></a></div>
         </section>
 
-        <section className="nature section-pad" aria-labelledby="nature-title">
-          <div className="nature-heading">
-            <p className="eyebrow"><span className="gold-line" /> BOTANICAL INSPIRATION</p>
-            <h2 id="nature-title">A touch of <em>nature.</em></h2>
-            <p>Inspired by the familiar ingredients loved in haircare rituals.</p>
-          </div>
-          <div className="nature-grid">
-            <article className="nature-item"><span className="nature-number">01</span><div><h3>Aloe Vera</h3><p>Inspired by gentle, refreshing care.</p><span>SHAMPOO</span></div></article>
-            <article className="nature-item"><span className="nature-number">02</span><div><h3>Argan Oil</h3><p>A nod to softness and a luminous finish.</p><span>HAIR SERUM</span></div></article>
-            <article className="nature-item"><span className="nature-number">03</span><div><h3>Shea Butter</h3><p>Known for its rich, comforting feel.</p><span>CONDITIONER</span></div></article>
-            <article className="nature-item"><span className="nature-number">04</span><div><h3>Coconut Oil</h3><p>A familiar touch in nourishing hair rituals.</p><span>HAIR MASK</span></div></article>
-          </div>
-          <p className="nature-note">Ingredient inspirations only — please refer to each product label for its confirmed ingredients.</p>
-        </section>
-
         <section className="collection section-pad" id="collection">
           <div className="section-heading">
             <div><p className="eyebrow"><span className="gold-line" /> THE COLLECTION</p><h2>Care, <em>curated.</em></h2></div>
@@ -151,6 +136,22 @@ function App() {
             ))}
           </div>
         </section>
+
+        <section className="nature section-pad" aria-labelledby="nature-title">
+          <div className="nature-heading">
+            <p className="eyebrow"><span className="gold-line" /> BOTANICAL INSPIRATION</p>
+            <h2 id="nature-title">A touch of <em>nature.</em></h2>
+            <p>Inspired by the familiar ingredients loved in haircare rituals.</p>
+          </div>
+          <div className="nature-grid">
+            <article className="nature-item"><span className="nature-number">01</span><div><h3>Aloe Vera</h3><p>Inspired by gentle, refreshing care.</p><span>SHAMPOO</span></div></article>
+            <article className="nature-item"><span className="nature-number">02</span><div><h3>Argan Oil</h3><p>A nod to softness and a luminous finish.</p><span>HAIR SERUM</span></div></article>
+            <article className="nature-item"><span className="nature-number">03</span><div><h3>Shea Butter</h3><p>Known for its rich, comforting feel.</p><span>CONDITIONER</span></div></article>
+            <article className="nature-item"><span className="nature-number">04</span><div><h3>Coconut Oil</h3><p>A familiar touch in nourishing hair rituals.</p><span>HAIR MASK</span></div></article>
+          </div>
+          <p className="nature-note">Ingredient inspirations only — please refer to each product label for its confirmed ingredients.</p>
+        </section>
+
 
         <section className="intro section-pad" id="philosophy">
           <div className="intro-label"><span className="gold-dot" /> THE AURÈLE APPROACH</div>
