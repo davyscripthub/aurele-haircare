@@ -457,6 +457,76 @@ blockquote em {
     gap: 13px
 }
 
+.botanical-section {
+    padding-top: 105px;
+    padding-bottom: 110px;
+    background: #11110f;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line)
+}
+.botanical-heading {
+    max-width: 620px;
+    margin: 0 auto 48px;
+    text-align: center
+}
+.botanical-heading .eyebrow { justify-content: center; margin-bottom: 19px }
+.botanical-heading h2 {
+    margin: 0;
+    font: 400 clamp(43px, 5vw, 65px)/1.05 "Playfair Display", serif;
+    letter-spacing: -1.5px
+}
+.botanical-heading h2 em { color: var(--gold); font-weight: 400 }
+.botanical-intro {
+    max-width: 490px;
+    margin: 20px auto 0;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.9
+}
+.botanical-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line)
+}
+.botanical-card {
+    min-height: 245px;
+    padding: 29px 24px 25px;
+    border-right: 1px solid var(--line)
+}
+.botanical-card:last-child { border-right: 0 }
+.botanical-number,
+.botanical-pairing {
+    color: var(--gold);
+    font-size: 8px;
+    letter-spacing: 1.5px
+}
+.botanical-card h3 {
+    margin: 29px 0 12px;
+    font: 400 25px "Playfair Display", serif
+}
+.botanical-card p {
+    margin: 0;
+    color: #a9a397;
+    font-size: 11px;
+    line-height: 1.9;
+    min-height: 82px
+}
+.botanical-pairing {
+    display: block;
+    margin-top: 20px;
+    color: #8f8065;
+    font-size: 7px
+}
+.botanical-disclaimer {
+    max-width: 850px;
+    margin: 23px auto 0;
+    color: #777267;
+    font-size: 9px;
+    line-height: 1.8;
+    text-align: center
+}
+
 .quote-section {
     text-align: center;
     padding: 115px 20px 120px;
@@ -768,6 +838,13 @@ blockquote em {
         grid-template-columns: 1fr 2fr
     }
 
+    .botanical-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr))
+    }
+    .botanical-card:nth-child(2) { border-right: 0 }
+    .botanical-card:nth-child(-n+2) { border-bottom: 1px solid var(--line) }
+
+
     .intro-aside {
         display: none
     }
@@ -868,6 +945,27 @@ blockquote em {
     .hero-bottom span:nth-child(2) {
         display: none
     }
+
+    .botanical-section {
+        padding-top: 78px;
+        padding-bottom: 78px
+    }
+
+    .botanical-heading { margin-bottom: 32px }
+    .botanical-heading h2 { font-size: 48px }
+    .botanical-card {
+        min-height: 0;
+        padding: 22px 15px
+    }
+    .botanical-card h3 {
+        font-size: 21px;
+        margin-top: 22px
+    }
+    .botanical-card p {
+        min-height: 0;
+        font-size: 10px
+    }
+    .botanical-pairing { line-height: 1.6 }
 
     .intro {
         padding-top: 80px;
