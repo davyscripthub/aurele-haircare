@@ -7,21 +7,37 @@ const products = [
   {
     id: 1, number: "01", name: "Nourishing Shampoo", subtitle: "A gentle beginning",
     description: "A luxurious cleanse that leaves hair feeling soft, refreshed and beautifully cared for.",
+    detail: "Make the first step of your routine feel like a moment of care. This gentle everyday shampoo cleanses the hair and scalp, leaving your hair feeling fresh and ready for the rest of your ritual.",
+    benefits: ["Cleanses hair and scalp", "Leaves hair feeling fresh and soft", "An easy fit for your regular wash routine"],
+    idealFor: "Anyone looking for a simple, feel-good shampoo for their regular hair-wash routine.",
+    howToUse: "Apply to wet hair, gently massage into the scalp and lengths, then rinse thoroughly. Repeat if desired.",
     price: 32, size: "500 ml", image: "/images/shampoo.jpg", tag: "DAILY RITUAL"
   },
   {
     id: 2, number: "02", name: "Hair Serum", subtitle: "The finishing touch",
     description: "A lightweight finishing ritual designed to smooth the look of strands and enhance natural shine.",
+    detail: "The finishing touch your routine has been waiting for. This lightweight serum helps smooth the appearance of strands and gives your hair a polished-looking finish without making your routine complicated.",
+    benefits: ["Helps smooth the look of strands", "Enhances the appearance of natural shine", "A lightweight finishing step"],
+    idealFor: "Those who want a neat, polished finish and an extra touch of shine in their hair routine.",
+    howToUse: "Warm a small amount between your palms and work through the lengths and ends. Start with a little and add more only if needed.",
     price: 38, size: "30 ml", image: "/images/hair serum.jpg", tag: "BESTSELLER"
   },
   {
     id: 3, number: "03", name: "Conditioner", subtitle: "Softness, renewed",
     description: "A rich yet effortless conditioner that helps detangle and leave lengths feeling silky.",
+    detail: "Give your lengths the care they deserve after cleansing. This conditioner helps make detangling easier and leaves hair feeling soft, smooth and silky to the touch.",
+    benefits: ["Helps detangle after washing", "Leaves lengths feeling soft and silky", "Complements your shampoo routine"],
+    idealFor: "Anyone who wants softer-feeling lengths and a smoother, easier detangling routine.",
+    howToUse: "After shampooing, apply through the mid-lengths and ends. Leave for a few minutes, then rinse thoroughly.",
     price: 34, size: "500 ml", image: "/images/conditioner.jpg", tag: "EVERYDAY LUXURY"
   },
   {
     id: 4, number: "04", name: "Hair Mask", subtitle: "A moment of restoration",
     description: "A deeply indulgent weekly treatment for hair that deserves a little more attention.",
+    detail: "Turn your weekly wash into a little at-home hair ritual. This rich treatment gives your lengths an extra moment of attention, leaving them feeling cared for, soft and smooth.",
+    benefits: ["An extra-care step for your weekly routine", "Leaves lengths feeling soft and smooth", "A more indulgent alternative to your everyday routine"],
+    idealFor: "Anyone who enjoys giving their hair a little extra care as part of a weekly ritual.",
+    howToUse: "After shampooing, apply through the lengths and ends. Leave on for a few minutes, then rinse thoroughly. Follow the product label for exact directions.",
     price: 42, size: "300 ml", image: "/images/hair mask.jpg", tag: "WEEKLY RITUAL"
   }
 ];
@@ -31,6 +47,7 @@ function App() {
   const [cartOpen, setCartOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [added, setAdded] = useState(null);
+  const [selectedProduct, setSelectedProduct] = useState(null);
   const count = cart.reduce((sum, item) => sum + item.qty, 0);
   const total = useMemo(() => cart.reduce((sum, item) => sum + item.price * item.qty, 0), [cart]);
 
@@ -111,7 +128,10 @@ function App() {
             {products.map(product => (
               <article className="product-card" key={product.id}>
                 <div className="product-image-wrap">
-                  <img src={product.image} alt={product.name} className="product-image" />
+                  <button className="product-view" onClick={() => setSelectedProduct(product)} aria-label={`View details for ${product.name}`}>
+                    <img src={product.image} alt={product.name} className="product-image" />
+                    <span className="product-view-label">VIEW PRODUCT <ArrowRight size={13} /></span>
+                  </button>
                   <span className="product-tag">{product.tag}</span>
                   <button className="quick-add" onClick={() => addToCart(product)} aria-label={`Add ${product.name} to bag`}>
                     {added === product.id ? "ADDED ✓" : <><Plus size={16} /> QUICK ADD</>}
@@ -120,7 +140,7 @@ function App() {
                 <div className="product-meta"><span>{product.number} / AURÈLE ESSENTIAL</span><span>{product.size}</span></div>
                 <div className="product-title-row"><div><h3>{product.name}</h3><p>{product.subtitle}</p></div><span className="price">${product.price}</span></div>
                 <p className="product-description">{product.description}</p>
-                <button className="text-link" onClick={() => addToCart(product)}>ADD TO BAG <ArrowRight size={14} /></button>
+                <button className="text-link" onClick={() => setSelectedProduct(product)}>DISCOVER PRODUCT <ArrowRight size={14} /></button>
               </article>
             ))}
           </div>
@@ -142,6 +162,37 @@ function App() {
         </div>
         <div className="footer-bottom"><span>© 2026 AURÈLE. ALL RIGHTS RESERVED.</span><span>MADE WITH INTENTION.</span><a href="#top">BACK TO TOP ↑</a></div>
       </footer>
+
+      {selectedProduct && <div className="product-modal-backdrop" onClick={() => setSelectedProduct(null)}>
+        <section className="product-modal" role="dialog" aria-modal="true" aria-labelledby="product-modal-title" onClick={event => event.stopPropagation()}>
+          <button className="product-modal-close icon-button" onClick={() => setSelectedProduct(null)} aria-label="Close product details"><X size={21} /></button>
+          <div className="product-modal-image">
+            <img src={selectedProduct.image} alt={selectedProduct.name} />
+            <span className="product-tag">{selectedProduct.tag}</span>
+          </div>
+          <div className="product-modal-content">
+            <p className="eyebrow"><span className="gold-line" /> AURÈLE ESSENTIAL · {selectedProduct.number}</p>
+            <h2 id="product-modal-title">{selectedProduct.name}</h2>
+            <p className="product-modal-subtitle">{selectedProduct.subtitle}</p>
+            <p className="product-modal-description">{selectedProduct.detail}</p>
+            <div className="product-modal-price-row"><strong>${selectedProduct.price}</strong><span>{selectedProduct.size}</span></div>
+            <div className="product-detail-block">
+              <h3>WHY YOU'LL LOVE IT</h3>
+              <ul>{selectedProduct.benefits.map((benefit, index) => <li key={index}><span>✦</span>{benefit}</li>)}</ul>
+            </div>
+            <div className="product-detail-block">
+              <h3>MADE FOR</h3>
+              <p>{selectedProduct.idealFor}</p>
+            </div>
+            <div className="product-detail-block">
+              <h3>HOW TO USE</h3>
+              <p>{selectedProduct.howToUse}</p>
+            </div>
+            <button className="button button-gold product-modal-add" onClick={() => { addToCart(selectedProduct); setSelectedProduct(null); }}>ADD TO BAG <ArrowRight size={15} /></button>
+            <p className="product-modal-note">A considered step in your everyday hair ritual.</p>
+          </div>
+        </section>
+      </div>}
 
       {cartOpen && <div className="drawer-backdrop" onClick={() => setCartOpen(false)}>
         <aside className="cart-drawer" onClick={e => e.stopPropagation()}>
