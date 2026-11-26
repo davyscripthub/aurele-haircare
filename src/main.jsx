@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { createRoot } from "react-dom/client";
-import { ArrowDown, ArrowRight, Plus, Minus, X, ShoppingBag, Menu, Sparkles, Instagram } from "lucide-react";
+import { ArrowDown, ArrowRight, Plus, Minus, X, ShoppingBag, Menu, Search, Instagram } from "lucide-react";
 import "./styles.css";
 
 const products = [
@@ -49,6 +49,9 @@ function App() {
   const [added, setAdded] = useState(null);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [aboutOpen, setAboutOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const searchResults = products.filter(product => `${product.name} ${product.subtitle} ${product.description} ${product.idealFor}`.toLowerCase().includes(searchQuery.trim().toLowerCase()));
   const count = cart.reduce((sum, item) => sum + item.qty, 0);
   const total = useMemo(() => cart.reduce((sum, item) => sum + item.price * item.qty, 0), [cart]);
 
@@ -89,13 +92,14 @@ function App() {
         <button className="mobile-menu icon-button" onClick={() => setMenuOpen(!menuOpen)} aria-label="Open menu"><Menu size={20} /></button>
         <nav className={`nav nav-left ${menuOpen ? "nav-open" : ""}`}>
           <a href="#collection" onClick={() => setMenuOpen(false)}>SHOP</a>
-          <a href="#philosophy" onClick={() => setMenuOpen(false)}>OUR PHILOSOPHY</a>
+          <div className="philosophy-search-wrap"><a href="#philosophy" onClick={() => { setMenuOpen(false); setSearchOpen(false); }}>OUR PHILOSOPHY</a><button className="search-trigger" onClick={() => { setSearchOpen(open => !open); setSearchQuery(""); }} aria-label="Search products" aria-expanded={searchOpen}><Search size={15} strokeWidth={1.7} /></button></div>
         </nav>
         <a className="wordmark" href="#top" aria-label="AURÈLE home">AURÈLE<span>®</span></a>
         <nav className="nav nav-right">
           <button className="about-trigger" onClick={() => setAboutOpen(true)}>ABOUT</button>
           <button className="cart-trigger" onClick={() => setCartOpen(true)}><ShoppingBag size={17} /> <span>BAG ({count})</span></button>
         </nav>
+            {searchOpen && <div className="product-search-panel" role="dialog" aria-label="Search AURÈLE products"><div className="product-search-input-wrap"><Search size={17} /><input autoFocus type="search" value={searchQuery} onChange={event => setSearchQuery(event.target.value)} placeholder="Search the collection..." aria-label="Search products" /><button className="search-close" onClick={() => setSearchOpen(false)} aria-label="Close search"><X size={17} /></button></div><div className="product-search-results">{searchQuery.trim() ? (searchResults.length ? searchResults.map(product => <button className="product-search-result" key={product.id} onClick={() => { setSelectedProduct(product); setSearchOpen(false); }}><img src={product.image} alt="" /><span><strong>{product.name}</strong><small>{product.subtitle}</small></span><b>{product.price} MAD</b><ArrowRight size={14} /></button>) : <p className="search-empty">No products found. Try another search.</p>) : <p className="search-hint">Search by product name or haircare need.</p>}</div></div>}
       </header>
 
       <main id="top">
