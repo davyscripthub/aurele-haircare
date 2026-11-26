@@ -11,7 +11,7 @@ const products = [
     benefits: ["Cleanses hair and scalp", "Leaves hair feeling fresh and soft", "An easy fit for your regular wash routine"],
     idealFor: "Anyone looking for a simple, feel-good shampoo for their regular hair-wash routine.",
     howToUse: "Apply to wet hair, gently massage into the scalp and lengths, then rinse thoroughly. Repeat if desired.",
-    price: 32, size: "500 ml", image: "/images/shampoo.jpg", tag: "DAILY RITUAL"
+    price: 320, size: "500 ml", image: "/images/shampoo.jpg", tag: "DAILY RITUAL"
   },
   {
     id: 2, number: "02", name: "Hair Serum", subtitle: "The finishing touch",
@@ -20,7 +20,7 @@ const products = [
     benefits: ["Helps smooth the look of strands", "Enhances the appearance of natural shine", "A lightweight finishing step"],
     idealFor: "Those who want a neat, polished finish and an extra touch of shine in their hair routine.",
     howToUse: "Warm a small amount between your palms and work through the lengths and ends. Start with a little and add more only if needed.",
-    price: 38, size: "30 ml", image: "/images/hair serum.jpg", tag: "BESTSELLER"
+    price: 380, size: "30 ml", image: "/images/hair serum.jpg", tag: "BESTSELLER"
   },
   {
     id: 3, number: "03", name: "Conditioner", subtitle: "Softness, renewed",
@@ -29,7 +29,7 @@ const products = [
     benefits: ["Helps detangle after washing", "Leaves lengths feeling soft and silky", "Complements your shampoo routine"],
     idealFor: "Anyone who wants softer-feeling lengths and a smoother, easier detangling routine.",
     howToUse: "After shampooing, apply through the mid-lengths and ends. Leave for a few minutes, then rinse thoroughly.",
-    price: 34, size: "500 ml", image: "/images/conditioner.jpg", tag: "EVERYDAY LUXURY"
+    price: 340, size: "500 ml", image: "/images/conditioner.jpg", tag: "EVERYDAY LUXURY"
   },
   {
     id: 4, number: "04", name: "Hair Mask", subtitle: "A moment of restoration",
@@ -38,7 +38,7 @@ const products = [
     benefits: ["An extra-care step for your weekly routine", "Leaves lengths feeling soft and smooth", "A more indulgent alternative to your everyday routine"],
     idealFor: "Anyone who enjoys giving their hair a little extra care as part of a weekly ritual.",
     howToUse: "After shampooing, apply through the lengths and ends. Leave on for a few minutes, then rinse thoroughly. Follow the product label for exact directions.",
-    price: 42, size: "300 ml", image: "/images/hair mask.jpg", tag: "WEEKLY RITUAL"
+    price: 420, size: "300 ml", image: "/images/hair mask.jpg", tag: "WEEKLY RITUAL"
   }
 ];
 
@@ -66,14 +66,14 @@ function App() {
 
   const checkoutViaWhatsApp = () => {
     const orderLines = cart.map(item =>
-      `• ${item.name} × ${item.qty} — ${(item.price * item.qty).toFixed(2)}`
+      `• ${item.name} × ${item.qty} — ${(item.price * item.qty).toFixed(0)} MAD`
     ).join("\\n");
     const message = [
       "Hello AURÈLE! I'd like to place an order:",
       "",
       orderLines,
       "",
-      `Total: ${total.toFixed(2)}`,
+      `Total: ${total.toFixed(0)} MAD`,
       "",
       "Please confirm my order. Thank you!"
     ].join("\\n");
@@ -138,7 +138,7 @@ function App() {
                   </button>
                 </div>
                 <div className="product-meta"><span>{product.number} / AURÈLE ESSENTIAL</span><span>{product.size}</span></div>
-                <div className="product-title-row"><div><h3>{product.name}</h3><p>{product.subtitle}</p></div><span className="price">${product.price}</span></div>
+                <div className="product-title-row"><div><h3>{product.name}</h3><p>{product.subtitle}</p></div><span className="price">{product.price} MAD</span></div>
                 <p className="product-description">{product.description}</p>
                 <button className="text-link" onClick={() => setSelectedProduct(product)}>DISCOVER PRODUCT <ArrowRight size={14} /></button>
               </article>
@@ -175,7 +175,7 @@ function App() {
             <h2 id="product-modal-title">{selectedProduct.name}</h2>
             <p className="product-modal-subtitle">{selectedProduct.subtitle}</p>
             <p className="product-modal-description">{selectedProduct.detail}</p>
-            <div className="product-modal-price-row"><strong>${selectedProduct.price}</strong><span>{selectedProduct.size}</span></div>
+            <div className="product-modal-price-row"><strong>{selectedProduct.price} MAD</strong><span>{selectedProduct.size}</span></div>
             <div className="product-detail-block">
               <h3>WHY YOU'LL LOVE IT</h3>
               <ul>{selectedProduct.benefits.map((benefit, index) => <li key={index}><span>✦</span>{benefit}</li>)}</ul>
@@ -198,8 +198,8 @@ function App() {
         <aside className="cart-drawer" onClick={e => e.stopPropagation()}>
           <div className="drawer-header"><div><p className="eyebrow">YOUR SELECTION</p><h2>Your bag <span>({count})</span></h2></div><button className="icon-button" onClick={() => setCartOpen(false)} aria-label="Close cart"><X /></button></div>
           {cart.length === 0 ? <div className="empty-cart"><ShoppingBag size={30} /><h3>Your bag is waiting.</h3><p>Discover the AURÈLE essentials and find your ritual.</p><button className="button button-gold" onClick={() => { setCartOpen(false); document.getElementById("collection").scrollIntoView({ behavior: "smooth" }); }}>EXPLORE COLLECTION <ArrowRight size={14} /></button></div> :
-            <><div className="cart-items">{cart.map(item => <div className="cart-item" key={item.id}><img src={item.image} alt="" /><div className="cart-item-info"><h3>{item.name}</h3><span>{item.size} · ${item.price}</span><div className="qty-control"><button onClick={() => changeQty(item.id, -1)} aria-label="Decrease quantity"><Minus size={13} /></button><span>{item.qty}</span><button onClick={() => changeQty(item.id, 1)} aria-label="Increase quantity"><Plus size={13} /></button></div></div><div className="cart-item-end"><b>${item.price * item.qty}</b><button onClick={() => removeItem(item.id)} className="remove-link">REMOVE</button></div></div>)}</div>
-              <div className="cart-summary"><div><span>Subtotal</span><strong>${total.toFixed(2)}</strong></div><p>Shipping and taxes calculated at checkout.</p><button className="button button-gold checkout" onClick={checkoutViaWhatsApp}>ORDER VIA WHATSAPP <ArrowRight size={15} /></button><button className="continue-shopping" onClick={() => setCartOpen(false)}>CONTINUE SHOPPING</button></div></>}
+            <><div className="cart-items">{cart.map(item => <div className="cart-item" key={item.id}><img src={item.image} alt="" /><div className="cart-item-info"><h3>{item.name}</h3><span>{item.size} · {item.price} MAD</span><div className="qty-control"><button onClick={() => changeQty(item.id, -1)} aria-label="Decrease quantity"><Minus size={13} /></button><span>{item.qty}</span><button onClick={() => changeQty(item.id, 1)} aria-label="Increase quantity"><Plus size={13} /></button></div></div><div className="cart-item-end"><b>{item.price * item.qty} MAD</b><button onClick={() => removeItem(item.id)} className="remove-link">REMOVE</button></div></div>)}</div>
+              <div className="cart-summary"><div><span>Subtotal</span><strong>{total.toFixed(0)} MAD</strong></div><p>Shipping and taxes calculated at checkout.</p><button className="button button-gold checkout" onClick={checkoutViaWhatsApp}>ORDER VIA WHATSAPP <ArrowRight size={15} /></button><button className="continue-shopping" onClick={() => setCartOpen(false)}>CONTINUE SHOPPING</button></div></>}
         </aside>
       </div>}
     </div>
