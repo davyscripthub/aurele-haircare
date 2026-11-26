@@ -1003,27 +1003,6 @@ blockquote em {
     overflow: hidden
 }
 .product-view .product-image { display: block }
-.product-view-label {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -35%);
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 13px 17px;
-    background: rgba(12, 12, 10, .88);
-    border: 1px solid rgba(197, 164, 109, .8);
-    color: #ead9ba;
-    font-size: 8px;
-    letter-spacing: 1.6px;
-    opacity: 0;
-    transition: .25s;
-    white-space: nowrap;
-    pointer-events: none
-}
-.product-card:hover .product-view-label,
-.product-view:focus-visible .product-view-label { opacity: 1; transform: translate(-50%, -50%) }
 .product-modal-backdrop {
     position: fixed;
     inset: 0;
