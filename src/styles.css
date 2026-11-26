@@ -1157,3 +1157,101 @@ blockquote em {
     .product-modal-close { top: 10px; right: 10px }
     .product-view-label { display: none }
 }
+
+
+/* Botanical inspiration section */
+.nature {
+    padding-top: 88px;
+    padding-bottom: 92px;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    background: #10100e
+}
+.nature-heading {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: end;
+    column-gap: 30px;
+    margin-bottom: 38px
+}
+.nature-heading .eyebrow { grid-column: 1 / -1; margin-bottom: 18px }
+.nature-heading h2 {
+    margin: 0;
+    font: 400 clamp(42px, 5vw, 61px)/1.05 "Playfair Display", serif;
+    letter-spacing: -1.5px
+}
+.nature-heading h2 em { color: var(--gold); font-weight: 400 }
+.nature-heading>p:last-child {
+    max-width: 300px;
+    justify-self: end;
+    margin: 0 0 5px;
+    color: var(--muted);
+    font: 14px/1.8 "Playfair Display", serif
+}
+.nature-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line)
+}
+.nature-item {
+    display: flex;
+    gap: 17px;
+    padding: 25px 18px 25px 0;
+    min-height: 142px;
+    border-right: 1px solid var(--line)
+}
+.nature-item:not(:first-child) { padding-left: 18px }
+.nature-item:last-child { border-right: 0 }
+.nature-number {
+    color: var(--gold);
+    font-size: 9px;
+    letter-spacing: 1px;
+    padding-top: 5px
+}
+.nature-item h3 {
+    margin: 0 0 8px;
+    font: 400 21px "Playfair Display", serif
+}
+.nature-item p {
+    min-height: 39px;
+    margin: 0 0 13px;
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.7
+}
+.nature-item div>span {
+    color: var(--gold);
+    font-size: 7px;
+    letter-spacing: 1.5px
+}
+.nature-note {
+    margin: 18px 0 0;
+    color: #777267;
+    font-size: 9px;
+    line-height: 1.7;
+    letter-spacing: .2px
+}
+@media(max-width:1000px) {
+    .nature-grid { grid-template-columns: repeat(2, 1fr) }
+    .nature-item:nth-child(2) { border-right: 0 }
+    .nature-item:nth-child(3), .nature-item:nth-child(4) { border-top: 1px solid var(--line) }
+    .nature-item:nth-child(3) { padding-left: 0 }
+}
+@media(max-width:650px) {
+    .nature { padding-top: 68px; padding-bottom: 68px }
+    .nature-heading { display: block; margin-bottom: 28px }
+    .nature-heading .eyebrow { margin-bottom: 17px }
+    .nature-heading h2 { font-size: 45px }
+    .nature-heading>p:last-child { margin-top: 13px; font-size: 13px }
+    .nature-grid { grid-template-columns: 1fr }
+    .nature-item, .nature-item:not(:first-child) {
+        min-height: 0;
+        padding: 20px 0;
+        border-right: 0;
+        border-top: 1px solid var(--line)
+    }
+    .nature-item:first-child { border-top: 0 }
+    .nature-item:nth-child(3), .nature-item:nth-child(4) { border-top: 1px solid var(--line) }
+    .nature-item p { min-height: 0; margin-bottom: 10px }
+}
