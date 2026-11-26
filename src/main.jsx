@@ -110,15 +110,6 @@ function App() {
           <div className="hero-bottom"><span>01 / 04</span><span>FORMULATED FOR YOUR RITUAL</span><a href="#collection">SCROLL TO DISCOVER <ArrowDown size={13} /></a></div>
         </section>
 
-        <section className="intro section-pad" id="philosophy">
-          <div className="intro-label"><span className="gold-dot" /> THE AURÈLE APPROACH</div>
-          <div className="intro-copy">
-            <h2>Less, but <em>exceptional.</em></h2>
-            <p>We believe beautiful hair begins with thoughtful care. A considered collection of essentials, designed to turn the everyday into something extraordinary.</p>
-          </div>
-          <div className="intro-aside">A QUIETER KIND<br />OF LUXURY <span>✳</span></div>
-        </section>
-
         <section className="collection section-pad" id="collection">
           <div className="section-heading">
             <div><p className="eyebrow"><span className="gold-line" /> THE COLLECTION</p><h2>Care, <em>curated.</em></h2></div>
@@ -144,6 +135,50 @@ function App() {
               </article>
             ))}
           </div>
+        </section>
+
+        <section className="botanical-section section-pad" id="botanicals">
+          <div className="botanical-heading">
+            <p className="eyebrow"><span className="gold-line" /> NATURE, IN EVERY RITUAL</p>
+            <h2>Inspired by <em>nature.</em></h2>
+            <p className="botanical-intro">Discover botanical ingredients often celebrated in haircare, and the thoughtful role they can play in a care ritual.</p>
+          </div>
+          <div className="botanical-grid">
+            <article className="botanical-card">
+              <span className="botanical-number">01 / CLEANSE</span>
+              <h3>Aloe Vera</h3>
+              <p>Known for its lightweight, soothing feel, aloe vera is a popular botanical in gentle scalp and haircare formulas.</p>
+              <span className="botanical-pairing">A NATURAL INSPIRATION FOR SHAMPOO</span>
+            </article>
+            <article className="botanical-card">
+              <span className="botanical-number">02 / NOURISH</span>
+              <h3>Argan Oil</h3>
+              <p>Rich in fatty acids and vitamin E, argan oil is loved in haircare for helping soften hair and enhance the look of shine.</p>
+              <span className="botanical-pairing">A NATURAL INSPIRATION FOR SERUM</span>
+            </article>
+            <article className="botanical-card">
+              <span className="botanical-number">03 / SOFTEN</span>
+              <h3>Shea Butter</h3>
+              <p>A rich plant butter valued in conditioning products for its emollient feel and help with softness.</p>
+              <span className="botanical-pairing">A NATURAL INSPIRATION FOR CONDITIONER</span>
+            </article>
+            <article className="botanical-card">
+              <span className="botanical-number">04 / RESTORE</span>
+              <h3>Coconut Oil</h3>
+              <p>A familiar haircare oil used in some treatments to help reduce protein loss and leave lengths feeling cared for.</p>
+              <span className="botanical-pairing">A NATURAL INSPIRATION FOR HAIR MASK</span>
+            </article>
+          </div>
+          <p className="botanical-disclaimer">Ingredient inspiration only. These are examples of botanicals that may suit these product types, not a confirmed ingredient list for AURÈLE formulas. Please verify each product’s INCI label before publishing ingredient or performance claims.</p>
+        </section>
+
+        <section className="intro section-pad" id="philosophy">
+          <div className="intro-label"><span className="gold-dot" /> THE AURÈLE APPROACH</div>
+          <div className="intro-copy">
+            <h2>Less, but <em>exceptional.</em></h2>
+            <p>We believe beautiful hair begins with thoughtful care. A considered collection of essentials, designed to turn the everyday into something extraordinary.</p>
+          </div>
+          <div className="intro-aside">A QUIETER KIND<br />OF LUXURY <span>✳</span></div>
         </section>
 
         <section className="quote-section">
