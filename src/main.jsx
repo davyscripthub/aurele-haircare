@@ -48,6 +48,7 @@ function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [added, setAdded] = useState(null);
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [aboutOpen, setAboutOpen] = useState(false);
   const count = cart.reduce((sum, item) => sum + item.qty, 0);
   const total = useMemo(() => cart.reduce((sum, item) => sum + item.price * item.qty, 0), [cart]);
 
@@ -92,7 +93,7 @@ function App() {
         </nav>
         <a className="wordmark" href="#top" aria-label="AURÈLE home">AURÈLE<span>®</span></a>
         <nav className="nav nav-right">
-          <a href="#about">ABOUT</a>
+          <button className="about-trigger" onClick={() => setAboutOpen(true)}>ABOUT</button>
           <button className="cart-trigger" onClick={() => setCartOpen(true)}><ShoppingBag size={17} /> <span>BAG ({count})</span></button>
         </nav>
       </header>
@@ -178,6 +179,23 @@ function App() {
         </div>
         <div className="footer-bottom"><span>© 2026 AURÈLE. ALL RIGHTS RESERVED.</span><span>MADE WITH INTENTION.</span><a href="#top">BACK TO TOP ↑</a></div>
       </footer>
+
+      {aboutOpen && <div className="about-modal-backdrop" onClick={() => setAboutOpen(false)}>
+        <section className="about-modal" role="dialog" aria-modal="true" aria-labelledby="about-modal-title" onClick={event => event.stopPropagation()}>
+          <button className="about-modal-close icon-button" onClick={() => setAboutOpen(false)} aria-label="Close about AURÈLE"><X size={21} /></button>
+          <p className="eyebrow"><span className="gold-line" /> THE AURÈLE STORY</p>
+          <h2 id="about-modal-title">Thoughtful care.<br /><em>Beautifully considered.</em></h2>
+          <p className="about-modal-lead">AURÈLE brings together four haircare essentials designed to make everyday care feel more intentional — from a fresh, gentle-feeling cleanse to the finishing touch of shine.</p>
+          <div className="about-modal-grid">
+            <article><span>01 / CLEANSE</span><h3>Nourishing Shampoo</h3><p>A refreshing first step for anyone who wants a simple, considered wash-day routine.</p></article>
+            <article><span>02 / FINISH</span><h3>Hair Serum</h3><p>For those seeking a smoother-looking finish and an added touch of shine.</p></article>
+            <article><span>03 / SOFTEN</span><h3>Conditioner</h3><p>For anyone looking to make detangling easier and leave lengths feeling soft.</p></article>
+            <article><span>04 / RESTORE</span><h3>Hair Mask</h3><p>A weekly extra-care ritual for people who like to give their lengths more attention.</p></article>
+          </div>
+          <div className="about-modal-origin"><h3>INSPIRED BY NATURE</h3><p>Our botanical inspiration includes aloe vera, argan oil, shea butter and coconut oil. These are inspirations for the collection, not a confirmed ingredient list: each product’s exact formula and ingredients should always be checked on its own label.</p></div>
+          <button className="button button-gold about-modal-cta" onClick={() => { setAboutOpen(false); document.getElementById("collection").scrollIntoView({ behavior: "smooth" }); }}>DISCOVER THE COLLECTION <ArrowRight size={15} /></button>
+        </section>
+      </div>}
 
       {selectedProduct && <div className="product-modal-backdrop" onClick={() => setSelectedProduct(null)}>
         <section className="product-modal" role="dialog" aria-modal="true" aria-labelledby="product-modal-title" onClick={event => event.stopPropagation()}>
