@@ -126,7 +126,6 @@ function App() {
                 <div className="product-image-wrap">
                   <button className="product-view" onClick={() => setSelectedProduct(product)} aria-label={`View details for ${product.name}`}>
                     <img src={product.image} alt={product.name} className="product-image" />
-                    <span className="product-view-label">VIEW PRODUCT <ArrowRight size={13} /></span>
                   </button>
                   <span className="product-tag">{product.tag}</span>
                   <button className="quick-add" onClick={() => addToCart(product)} aria-label={`Add ${product.name} to bag`}>
