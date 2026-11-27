@@ -133,7 +133,8 @@ function App() {
   };
 
   return (
-    <div className="site-shell">\n      <div className="custom-cursor" aria-hidden="true" /><div className="custom-cursor-dot" aria-hidden="true" />
+    <div className="site-shell">
+      <div className="custom-cursor" aria-hidden="true" /><div className="custom-cursor-dot" aria-hidden="true" />
       <div className="announcement">A NEW STANDARD IN HAIRCARE <span>✦</span> DISCOVER THE AURÈLE RITUAL</div>
       <header className="header">
         <button className="mobile-menu icon-button" onClick={() => setMenuOpen(!menuOpen)} aria-label="Open menu"><Menu size={20} /></button>
