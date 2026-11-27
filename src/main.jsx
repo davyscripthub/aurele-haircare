@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { ArrowDown, ArrowRight, Plus, Minus, X, ShoppingBag, Menu, Search, Instagram } from "lucide-react";
 import "./styles.css";
@@ -51,6 +51,23 @@ function App() {
   const [aboutOpen, setAboutOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+
+  useEffect(() => {
+    if (!window.matchMedia("(pointer: fine)").matches) return;
+    const cursor = document.querySelector(".custom-cursor");
+    if (!cursor) return;
+    const moveCursor = event => {
+      cursor.style.transform = `translate3d(${event.clientX}px, ${event.clientY}px, 0)`;
+      cursor.classList.add("is-visible");
+    };
+    const hideCursor = () => cursor.classList.remove("is-visible");
+    window.addEventListener("pointermove", moveCursor);
+    document.addEventListener("pointerleave", hideCursor);
+    return () => {
+      window.removeEventListener("pointermove", moveCursor);
+      document.removeEventListener("pointerleave", hideCursor);
+    };
+  }, []);
   const searchResults = products.filter(product => `${product.name} ${product.subtitle} ${product.description} ${product.idealFor}`.toLowerCase().includes(searchQuery.trim().toLowerCase()));
   const count = cart.reduce((sum, item) => sum + item.qty, 0);
   const total = useMemo(() => cart.reduce((sum, item) => sum + item.price * item.qty, 0), [cart]);
@@ -84,7 +101,7 @@ function App() {
   };
 
   return (
-    <div className="site-shell">
+    <div className="site-shell">\n      <div className="custom-cursor" aria-hidden="true"><span /></div>
       <div className="announcement">A NEW STANDARD IN HAIRCARE <span>✦</span> DISCOVER THE AURÈLE RITUAL</div>
       <header className="header">
         <button className="mobile-menu icon-button" onClick={() => setMenuOpen(!menuOpen)} aria-label="Open menu"><Menu size={20} /></button>
