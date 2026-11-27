@@ -54,16 +54,48 @@ function App() {
 
   useEffect(() => {
     if (!window.matchMedia("(pointer: fine)").matches) return;
-    const cursor = document.querySelector(".custom-cursor");
-    if (!cursor) return;
+    const ring = document.querySelector(".custom-cursor");
+    const dot = document.querySelector(".custom-cursor-dot");
+    if (!ring || !dot) return;
+
+    let targetX = window.innerWidth / 2;
+    let targetY = window.innerHeight / 2;
+    let ringX = targetX;
+    let ringY = targetY;
+    let frameId;
+    let visible = false;
+
     const moveCursor = event => {
-      cursor.style.transform = `translate3d(${event.clientX}px, ${event.clientY}px, 0)`;
-      cursor.classList.add("is-visible");
+      targetX = event.clientX;
+      targetY = event.clientY;
+      dot.style.transform = `translate3d(${targetX}px, ${targetY}px, 0) translate(-50%, -50%)`;
+      if (!visible) {
+        visible = true;
+        ringX = targetX;
+        ringY = targetY;
+        ring.classList.add("is-visible");
+        dot.classList.add("is-visible");
+      }
     };
-    const hideCursor = () => cursor.classList.remove("is-visible");
+
+    const animateRing = () => {
+      ringX += (targetX - ringX) * 0.12;
+      ringY += (targetY - ringY) * 0.12;
+      ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
+      frameId = window.requestAnimationFrame(animateRing);
+    };
+
+    const hideCursor = () => {
+      visible = false;
+      ring.classList.remove("is-visible");
+      dot.classList.remove("is-visible");
+    };
+
+    frameId = window.requestAnimationFrame(animateRing);
     window.addEventListener("pointermove", moveCursor);
     document.addEventListener("pointerleave", hideCursor);
     return () => {
+      window.cancelAnimationFrame(frameId);
       window.removeEventListener("pointermove", moveCursor);
       document.removeEventListener("pointerleave", hideCursor);
     };
@@ -101,7 +133,7 @@ function App() {
   };
 
   return (
-    <div className="site-shell">\n      <div className="custom-cursor" aria-hidden="true"><span /></div>
+    <div className="site-shell">\n      <div className="custom-cursor" aria-hidden="true" /><div className="custom-cursor-dot" aria-hidden="true" />
       <div className="announcement">A NEW STANDARD IN HAIRCARE <span>✦</span> DISCOVER THE AURÈLE RITUAL</div>
       <header className="header">
         <button className="mobile-menu icon-button" onClick={() => setMenuOpen(!menuOpen)} aria-label="Open menu"><Menu size={20} /></button>
