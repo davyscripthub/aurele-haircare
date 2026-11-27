@@ -71,16 +71,14 @@ function App() {
   const checkoutViaWhatsApp = () => {
     const orderLines = cart.map(item =>
       `• ${item.name} × ${item.qty} — ${(item.price * item.qty).toFixed(0)} MAD`
-    ).join("\\n");
+    );
     const message = [
-      "Hello AURÈLE! I'd like to place an order:",
+      "Hello, I'd like to place an order:",
       "",
-      orderLines,
+      ...orderLines,
       "",
-      `Total: ${total.toFixed(0)} MAD`,
-      "",
-      "Please confirm my order. Thank you!"
-    ].join("\\n");
+      `Total: ${total.toFixed(0)} MAD`
+    ].join("\n");
     const whatsappUrl = `https://wa.me/212617543162?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, "_blank", "noopener,noreferrer");
   };
